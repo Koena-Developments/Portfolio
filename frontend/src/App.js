@@ -1,15 +1,15 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
-import Greet from './components/Nav_bar'
+import NavigationBar from './components/Nav_bar';
+import ProfilePage from './components/ProfilePage'; 
 
-function App() {
+function App() {                  
   return (
     <div className="App">
-      <Greet/>
+      <NavigationBar/>
 
       <div style={{ paddingTop: '60px', paddingBottom: '60px' }}>
-        Your main content goes here
-        <h1>Main Content Here</h1>
+        <ProfilePage />  
       </div>
 
     </div>

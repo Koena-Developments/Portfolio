@@ -1,57 +1,28 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-  }
-  
-  .search-bar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 10px 20px;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-  }
-  
-  .search-bar input {
-    width: 250px;
-    padding: 8px;
-    border-radius: 3px;
-    border: 1px solid #dbdbdb;
-    background-color: #fafafa;
-  }
-  
-  .navbar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .navbar__menu {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-  }
-  
-  .navbar__link {
-    color: white;
-    font-size: 24px;
-    text-decoration: none;
-  }
-  
-  .navbar__link:hover {
-    color: #fafafa;
-  }
-  
-  .navbar__link svg {
-    cursor: pointer;
-  }
-  
+/* NavigationBar.css */
+
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  border-top: 1px solid #dbdbdb;
+  padding: 10px 0;
+}
+
+.nav-icons {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-icons li {
+  display: inline-block;
+  cursor: pointer;
+  color: #262626;
+}
+
+.nav-icons li:hover {
+  color: #000; 
+}
