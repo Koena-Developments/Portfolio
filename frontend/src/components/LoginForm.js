@@ -1,5 +1,6 @@
+// src/components/LoginForm.js
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios'; 
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -13,9 +14,10 @@ const LoginForm = () => {
                 username,
                 password,
             });
-            console.log(response.data); 
-        } catch (err) {
-            setError(err.response.data.error || 'Login failed');
+            console.log('Login successful:', response.data.message);
+        } catch (error) {
+            setError(error.response?.data?.error || 'Login failed');
+            console.error('Error logging in:', error);
         }
     };
 

@@ -10,5 +10,6 @@ from . import views
 urlpatterns = [
     path('api/', views.apiOverview, name="api-overview"),
     path('api/login/', views.login_view, name='login_api'),
-    path('logout/', views.logout_view, name='logout_api'),
+    path('api/logout/', views.logout_view, name='logout_api'),
+    path('api/signup/', views.signup_view, name="signup_api"),
 ]
