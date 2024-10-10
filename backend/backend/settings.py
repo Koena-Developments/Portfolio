@@ -52,8 +52,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',  
+]
 
-CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -77,7 +79,6 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -88,6 +89,7 @@ DATABASES = {
         'PORT': '5432',                 # Default PostgreSQL port
     }
 }
+
 
 
 LOGIN_REDIRECT_URL = '/'
