@@ -1,76 +1,70 @@
-// src/components/SignupForm.js
+
+
 import React, { useState } from 'react';
+import axios from 'axios';
 
-const SignupForm = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
+const Signup = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch('http://127.0.0.1:8000/api/signup/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, email, password }),
-            });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-            if (response.ok) {
-                const data = await response.json();
-                setSuccessMessage(data.message);
-                // Reset the form fields
-                setUsername('');
-                setEmail('');
-                setPassword('');
-            } else {
-                const errorData = await response.json();
-                setError(errorData.error || 'Signup failed');
-            }
-        } catch (error) {
-            setError('Error signing up');
-            console.error('Error signing up:', error);
-        }
-    };
+    try {
+      const response = await axios.post('http://localhost:8000/api/signup/', {
+        username,
+        password,
+        email,
+      });
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <h2>Sign Up</h2>
-            <div>
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Username"
-                    required
-                />
-            </div>
-            <div>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    required
-                />
-            </div>
-            <div>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    required
-                />
-            </div>
-            <button type="submit">Sign Up</button>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-        </form>
-    );
+      if (response.status === 201) {
+        setMessage('Signup successful! You can now like, follow, and comment.');
+      } else {
+        setMessage('Signup failed. Please try again.');
+      }
+    } catch (error) {
+      setMessage(error.response.data.error || 'An error occurred. Please try again.');
+    }
+  };
+
+  return (
+    <div>
+      <h2>Sign Up</h2>
+      {message && <p>{message}</p>}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Username:</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+  );
 };
 
-export default SignupForm;
+export default Signup;
