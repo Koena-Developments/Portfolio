@@ -4,40 +4,39 @@ import './ProfilePage.css';
 
 const ProfilePage = () => {
     const [isFollowing, setIsFollowing] = useState(false);
-    const [profileData, setProfileData] = useState(null); // Initialize as null to indicate no data yet
+    const [profileData, setProfileData] = useState(null); 
     const [projects, setProjects] = useState([]);
-    const [loadingProfile, setLoadingProfile] = useState(true); // Track loading state
+    const [loadingProfile, setLoadingProfile] = useState(true); 
 
     const getToken = () => localStorage.getItem('token');
 
     useEffect(() => {
         const token = getToken();
 
-        // Fetch profile data
         axios.get('http://127.0.0.1:8000/api/profile', {
             headers: {
                 Authorization: `Bearer ${token}`,  
             },
         })
         .then(response => {
-            console.log('Profile Data:', response.data); // Log profile data for debugging
-            setProfileData(response.data); // Set profile data once fetched
-            setLoadingProfile(false);  // Set loading to false after receiving data
+            console.log('Profile Data:', response.data); 
+            setProfileData(response.data); 
+            setLoadingProfile(false);  
         })
         .catch(error => {
             console.error('Error fetching profile data:', error);
-            setLoadingProfile(false);  // Set loading to false even if there's an error
+            setLoadingProfile(false); 
         });
 
         // Fetch projects data
         axios.get('http://127.0.0.1:8000/api/projects/', {
             headers: {
-                Authorization: `Bearer ${token}`,  // Add the token in the Authorization header
+                Authorization: `Bearer ${token}`,  
             },
         })
         .then(response => {
-            console.log('Projects Data:', response.data); // Log projects data for debugging
-            setProjects(response.data); // Set projects data once fetched
+            console.log('Projects Data:', response.data); 
+            setProjects(response.data); 
         })
         .catch(error => {
             console.error('Error fetching projects:', error);
@@ -53,7 +52,7 @@ const ProfilePage = () => {
         { isFollowing: !isFollowing }, 
         {
             headers: {
-                Authorization: `Bearer ${token}`,  // Add the token in the Authorization header
+                Authorization: `Bearer ${token}`,
             },
         })
         .then(response => {
@@ -71,7 +70,6 @@ const ProfilePage = () => {
     return (
         <div className="profile-container">
             <div className="profile-header">
-                {/* Ensure profileData is not null before accessing its properties */}
                 {profileData && (
                     <>
                         <img 
