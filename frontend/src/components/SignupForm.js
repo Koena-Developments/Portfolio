@@ -1,13 +1,13 @@
-
-
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate(); // For navigation after signup
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,47 +21,51 @@ const Signup = () => {
 
       if (response.status === 201) {
         setMessage('Signup successful! You can now like, follow, and comment.');
+        navigate('/login'); // Redirect to login after successful signup
       } else {
         setMessage('Signup failed. Please try again.');
       }
     } catch (error) {
-      setMessage(error.response.data.error || 'An error occurred. Please try again.');
+      setMessage(error.response?.data?.error || 'An error occurred. Please try again.');
     }
   };
 
   return (
-    <div>
+    <div className="signup-container">
       <h2>Sign Up</h2>
-      {message && <p>{message}</p>}
+      {message && <p className="signup-message">{message}</p>}
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
+        <div className="form-group">
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
+            id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Email:</label>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
-        <div>
-          <label>Password:</label>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <button type="submit" className="signup-button">Sign Up</button>
       </form>
     </div>
   );
