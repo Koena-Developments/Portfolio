@@ -66,29 +66,45 @@ def add_project(request):
 
 @api_view(['GET'])
 def get_projects(request):
-    projects = Project.objects.all()  
-    serialized_projects = ProjectSerializer(projects, many=True)
+    projects = Project.objects.all()
+    serialized_projects = ProjectSerializer(projects, many=True, context={'request': request})
     return Response(serialized_projects.data, status=status.HTTP_200_OK)
-
 @api_view(['POST'])
-def like_project(request, project_id):
+def like_unlike_project(request, project_id):
+    try:
+        project = Project.objects.get(id=project_id)
+    except Project.DoesNotExist:
+        return Response({'error': 'Project not found'}, status=status.HTTP_404_NOT_FOUND)
+
     ip = get_client_ip(request)
-    project = Project.objects.get(id=project_id)
 
     if request.user.is_authenticated:
-        if Like.objects.filter(user=request.user, project=project).exists():
-            return Response({'error': 'You have already liked this project'}, status=status.HTTP_400_BAD_REQUEST)
-        Like.objects.create(user=request.user, project=project)
+        like = Like.objects.filter(user=request.user, project=project).first()
+        if like:
+            # Unlike logic
+            like.delete()
+            project.like_count -= 1
+            project.save()
+            return Response({'success': 'Unliked successfully', 'likes': project.like_count}, status=status.HTTP_200_OK)
+        else:
+            # Like logic
+            Like.objects.create(user=request.user, project=project)
+            project.like_count += 1
+            project.save()
+            return Response({'success': 'Liked successfully', 'likes': project.like_count}, status=status.HTTP_200_OK)
     else:
-        if Like.objects.filter(ip_address=ip, project=project).exists():
-            return Response({'error': 'You have already liked this project'}, status=status.HTTP_400_BAD_REQUEST)
-        Like.objects.create(ip_address=ip, project=project)
-
-    project.like_count += 1
-    project.save()
-    return Response({'success': 'Liked successfully', 'likes': project.like_count}, status=status.HTTP_200_OK)
-
-
+        like = Like.objects.filter(ip_address=ip, project=project).first()
+        if like:
+            # Unlike logic for anonymous user
+            like.delete()
+            project.like_count -= 1
+            project.save()
+            return Response({'success': 'Unliked successfully', 'likes': project.like_count}, status=status.HTTP_200_OK)
+        else:
+            Like.objects.create(ip_address=ip, project=project)
+            project.like_count += 1
+            project.save()
+            return Response({'success': 'Liked successfully', 'likes': project.like_count}, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def follow_profile(request, username):
