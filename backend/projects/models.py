@@ -25,18 +25,21 @@ class Project(models.Model):
         return self.title
 
 class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    liked_at = models.DateTimeField(auto_now_add=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)  
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.user.username} liked {self.project.title}'
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+   class Comment(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)  
     text = models.TextField()
-    commented_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'Comment by {self.user.username} on {self.project.title}'
@@ -44,6 +47,7 @@ class Comment(models.Model):
 class Follower(models.Model):
     follower_identifier = models.CharField(max_length=255, default='unknown')
     followed = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')
+    ip_address = models.GenericIPAddressField(null=True, blank=True) 
     followed_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -57,7 +57,11 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',  
 ]
-
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "Authorization",
+    "Anonymous-Id",
+]
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
@@ -84,11 +88,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'datadot_db',   
-        'USER': 'postgres',        # Your PostgreSQL username
-        'PASSWORD': '9906165353086Tm#',    # Your PostgreSQL password
-        'HOST': 'localhost',            # Or your database server IP address
-        'PORT': '5432',                 # Default PostgreSQL port
+        'NAME': 'datadot_db',
+        'USER': 'postgres',
+        'PASSWORD': '9906165353086Tm#',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

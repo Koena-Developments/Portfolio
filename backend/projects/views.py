@@ -29,6 +29,14 @@ def signup_view(request):
 
     return Response({'success': 'User created successfully'}, status=status.HTTP_201_CREATED)
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 @api_view(['POST'])
 def create_or_update_profile(request):
     bio = request.data.get('bio')
@@ -64,33 +72,35 @@ def get_projects(request):
 
 @api_view(['POST'])
 def like_project(request, project_id):
-    try:
-        project = Project.objects.get(id=project_id)
-        if not Like.objects.filter(user=request.user, project=project).exists():
-            Like.objects.create(user=request.user, project=project)
-            project.like_count += 1
-            project.save()
-            return Response({'success': 'Liked successfully', 'likes': project.like_count}, status=status.HTTP_200_OK)
-        else:
+    ip = get_client_ip(request)
+    project = Project.objects.get(id=project_id)
+
+    if request.user.is_authenticated:
+        if Like.objects.filter(user=request.user, project=project).exists():
             return Response({'error': 'You have already liked this project'}, status=status.HTTP_400_BAD_REQUEST)
-    except Project.DoesNotExist:
-        return Response({'error': 'Project not found'}, status=status.HTTP_404_NOT_FOUND)
+        Like.objects.create(user=request.user, project=project)
+    else:
+        if Like.objects.filter(ip_address=ip, project=project).exists():
+            return Response({'error': 'You have already liked this project'}, status=status.HTTP_400_BAD_REQUEST)
+        Like.objects.create(ip_address=ip, project=project)
+
+    project.like_count += 1
+    project.save()
+    return Response({'success': 'Liked successfully', 'likes': project.like_count}, status=status.HTTP_200_OK)
+
+
 
 @api_view(['POST'])
 def follow_profile(request, username):
+    ip = get_client_ip(request)
     try:
         admin_user = User.objects.get(username=username)
-        follower_identifier = request.user.username if request.user.is_authenticated else "AnonymousUser"
+        follower_identifier = request.user.username if request.user.is_authenticated else f'Anonymous_{ip}'
 
-        if follower_identifier == "AnonymousUser":
-            existing_follower = Follower.objects.filter(follower_identifier=follower_identifier, followed=admin_user).first()
-            if existing_follower:
-                return Response({'error': 'Anonymous users can only follow a profile once'}, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            if Follower.objects.filter(follower_identifier=follower_identifier, followed=admin_user).exists():
-                return Response({'error': 'You are already following this profile'}, status=status.HTTP_400_BAD_REQUEST)
+        if Follower.objects.filter(follower_identifier=follower_identifier, followed=admin_user).exists():
+            return Response({'error': 'Already following'}, status=status.HTTP_400_BAD_REQUEST)
 
-        Follower.objects.create(follower_identifier=follower_identifier, followed=admin_user)
+        Follower.objects.create(follower_identifier=follower_identifier, followed=admin_user, ip_address=ip)
 
         admin_profile = Profile.objects.get(user=admin_user)
         admin_profile.followers_count += 1
@@ -98,69 +108,49 @@ def follow_profile(request, username):
 
         return Response(
             {'success': 'Followed successfully', 'followers': admin_profile.followers_count},
-            status=status.HTTP_201_CREATED
+            status=status.HTTP_200_OK
         )
-
     except User.DoesNotExist:
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
 def unfollow_profile(request, username):
+    ip = get_client_ip(request)
     try:
         admin_user = User.objects.get(username=username)
-        follower_identifier = request.user.username if request.user.is_authenticated else "AnonymousUser"
+        follower_identifier = request.user.username if request.user.is_authenticated else f'Anonymous_{ip}'
 
-        if follower_identifier == "AnonymousUser":
-            follower_record = Follower.objects.filter(
-                follower_identifier=follower_identifier, followed=admin_user
-            ).first()
-            if not follower_record:
-                return Response({'error': 'Anonymous users cannot unfollow if they are not following'}, status=status.HTTP_400_BAD_REQUEST)
+        follower_record = Follower.objects.filter(follower_identifier=follower_identifier, followed=admin_user).first()
+        if not follower_record:
+            return Response({'error': 'Not following this profile'}, status=status.HTTP_400_BAD_REQUEST)
 
-            follower_record.delete()
+        follower_record.delete()
 
-            admin_profile = Profile.objects.get(user=admin_user)
-            admin_profile.followers_count -= 1
-            admin_profile.save()
+        admin_profile = Profile.objects.get(user=admin_user)
+        admin_profile.followers_count -= 1
+        admin_profile.save()
 
-            return Response(
-                {'success': 'Unfollowed successfully', 'followers': admin_profile.followers_count},
-                status=status.HTTP_200_OK
-            )
-        else:
-            follower_record = Follower.objects.filter(
-                follower_identifier=follower_identifier, followed=admin_user
-            ).first()
-            if not follower_record:
-                return Response({'error': 'You are not following this profile'}, status=status.HTTP_400_BAD_REQUEST)
-
-            follower_record.delete()
-
-            admin_profile = Profile.objects.get(user=admin_user)
-            admin_profile.followers_count -= 1
-            admin_profile.save()
-
-            return Response(
-                {'success': 'Unfollowed successfully', 'followers': admin_profile.followers_count},
-                status=status.HTTP_200_OK
-            )
-
+        return Response(
+            {'success': 'Unfollowed successfully', 'followers': admin_profile.followers_count},
+            status=status.HTTP_200_OK
+        )
     except User.DoesNotExist:
         return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['POST'])
 def add_comment(request, project_id):
+    ip = get_client_ip(request)
     project = Project.objects.get(id=project_id)
     comment_text = request.data.get('comment')
-    
+
     if not comment_text:
         return Response({'error': 'Comment text is required'}, status=status.HTTP_400_BAD_REQUEST)
 
-    Comment.objects.create(
-        user=request.user,
-        project=project,
-        text=comment_text
-    )
+    if request.user.is_authenticated:
+        Comment.objects.create(user=request.user, project=project, text=comment_text)
+    else:
+        Comment.objects.create(ip_address=ip, project=project, text=comment_text)
+
     return Response({'success': 'Comment added successfully'}, status=status.HTTP_201_CREATED)
 
 @api_view(['GET'])
