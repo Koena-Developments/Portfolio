@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import NavigationBar from './components/Nav_bar';
 import ProfilePage from './components/ProfilePage';
-import LoginForm from './components/LoginForm'; 
+// import LoginForm from './components/LoginForm'; 
 import SignupForm from './components/SignupForm';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ function App() {
             <div style={{ paddingTop: '60px', paddingBottom: '60px' }}>
                 <Routes>
                     <Route path="/" element={<ProfilePage />} /> 
-                    <Route path="/login" element={<LoginForm />} /> 
+                    {/* <Route path="/login" element={<LoginForm />} />  */}
                     <Route path= "/signup" element={<SignupForm />} />
                 </Routes>
             </div>

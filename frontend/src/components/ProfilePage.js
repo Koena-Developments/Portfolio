@@ -9,7 +9,7 @@ const ProfilePage = () => {
     const [loadingProfile, setLoadingProfile] = useState(true);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/profile/wethinkcode/')
+        axios.get('http://127.0.0.1:8000/api/profile/THABANG/')
             .then(response => {
                 setProfileData(response.data);
                 setIsFollowing(response.data.is_following);
@@ -32,7 +32,7 @@ const ProfilePage = () => {
     const handleFollowClick = () => {
         const followAction = isFollowing ? 'unfollow' : 'follow';
 
-        axios.post(`http://127.0.0.1:8000/api/${followAction}/`, {}, {
+        axios.post(`http://127.0.0.1:8000/api/${followAction}/THABANG/`, {}, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }, 
         })
         .then(response => {
@@ -45,6 +45,22 @@ const ProfilePage = () => {
         .catch(error => {
             console.error(`Error in ${followAction}:`, error);
         });
+    };
+
+    const handleShareClick = () => {
+        const shareData = {
+            title: 'Check out this profile!',
+            text: `Take a look at ${profileData.username}'s profile on our platform.`,
+            url: window.location.href
+        };
+
+        if (navigator.share) {
+            navigator.share(shareData).catch(err => console.error('Error sharing:', err));
+        } else {
+            navigator.clipboard.writeText(shareData.url)
+                .then(() => alert('Profile URL copied to clipboard!'))
+                .catch(err => console.error('Failed to copy:', err));
+        }
     };
 
     if (loadingProfile) return <div>Loading profile data...</div>;
@@ -64,6 +80,7 @@ const ProfilePage = () => {
                         <button className="follow-button" onClick={handleFollowClick}>
                             {isFollowing ? 'Unfollow' : 'Follow'}
                         </button>
+                        <button className="share-button" onClick={handleShareClick}>Share Profile</button>
                     </div>
                     <div className="profile-stats">
                         <span><strong>{projects.length}</strong> projects</span>
