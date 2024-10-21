@@ -5,21 +5,17 @@ const NavigationBar = () => {
     return (
         <nav className="nav-bar">
             <ul className="nav-icons">
+               
+                <li>
+                    <FaUserCircle size={24} />
+                </li>
                 <li>
                     <FaHome size={24} />
                 </li>
                 <li>
-                    <FaSearch size={24} />
-                </li>
-                <li>
-                    <FaPlusSquare size={24} />
-                </li>
-                <li>
                     <FaHeart size={24} />
                 </li>
-                <li>
-                    <FaUserCircle size={24} />
-                </li>
+                
             </ul>
         </nav>
     );

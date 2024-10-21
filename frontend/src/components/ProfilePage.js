@@ -110,11 +110,16 @@ const ProfilePage = () => {
             alt="Profile"
             className="profile-image"
         />
-        <div className="status-ring"></div> {/* Status ring */}
+        <div className="status-ring"></div> 
     </div>
+    
+    <div class = "username">
+    <h2>{profileData.username}</h2>
+    </div>
+
     <div className="profile-info">
         <div className="profile-username">
-            <h2>{profileData.username}</h2>
+          
             <button className="follow-button" onClick={handleFollowClick}>
                 {isFollowing ? 'Unfollow' : 'Follow'}
             </button>
