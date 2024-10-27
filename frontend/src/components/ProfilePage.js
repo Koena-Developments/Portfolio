@@ -119,7 +119,6 @@ const ProfilePage = () => {
 
     <div className="profile-info">
         <div className="profile-username">
-          
             <button className="follow-button" onClick={handleFollowClick}>
                 {isFollowing ? 'Unfollow' : 'Follow'}
             </button>
@@ -134,8 +133,6 @@ const ProfilePage = () => {
         </div>
     </div>
 </div>
-
-
             <div className="profile-posts">
                 <div className="grid-posts">
                     {projects.map(project => (
