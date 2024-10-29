@@ -137,7 +137,6 @@ const ProfilePage = () => {
         </div>
     </div>
 </div>
-
             <div className ="Job-title">
                 <ul class="titles"> 
                 <li>
@@ -151,7 +150,6 @@ const ProfilePage = () => {
                 </li>
                 </ul>
             </div>
- 
 
             <div className="profile-posts">
                 <div className="grid-posts">
