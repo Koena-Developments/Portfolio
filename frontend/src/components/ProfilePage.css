@@ -25,15 +25,14 @@
     100% { background-position: 0% 50%; }
 }
 
+
+/* for the navigation of careers */
 .titles
 {
-    display: grid;
     display: flex;
-    gap: 15px;
     flex-direction: row;
-    margin-top: -150px;
-    /* margin-left: 15px; */
-    gap: 5px;
+    margin-top: -90px;
+    margin-left: 46%;
 }
 
 .profile-header {

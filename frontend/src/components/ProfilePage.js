@@ -151,9 +151,7 @@ const ProfilePage = () => {
                 </li>
                 </ul>
             </div>
-    <div>
-
-    </div>
+ 
 
             <div className="profile-posts">
                 <div className="grid-posts">
