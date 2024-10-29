@@ -7,7 +7,7 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate(); // For navigation after signup
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const Signup = () => {
 
       if (response.status === 201) {
         setMessage('Signup successful! You can now like, follow, and comment.');
-        navigate('/login'); // Redirect to login after successful signup
+        navigate('/login'); 
       } else {
         setMessage('Signup failed. Please try again.');
       }

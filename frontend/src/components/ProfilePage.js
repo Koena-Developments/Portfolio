@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FaHome, FaHeart} from 'react-icons/fa';
+import { Si365Datascience } from "react-icons/si";
+import { MdEngineering } from "react-icons/md";
+import { GiArtificialIntelligence } from "react-icons/gi";
 import './ProfilePage.css';
 
 const ProfilePage = () => {
@@ -15,7 +19,7 @@ const ProfilePage = () => {
             localStorage.setItem('anonymousId', anonymousId);
         }
 
-        axios.get('http://127.0.0.1:8000/api/profile/THABANG/')
+        axios.get('http://127.0.0.1:8000/api/profile/wethinkcode/')
             .then(response => {
                 setProfileData(response.data);
                 setIsFollowing(response.data.is_following);
@@ -39,7 +43,7 @@ const ProfilePage = () => {
         const followAction = isFollowing ? 'unfollow' : 'follow';
         try {
             const response = await axios.post(
-                `http://127.0.0.1:8000/api/${followAction}/THABANG/`, 
+                `http://127.0.0.1:8000/api/${followAction}/wethinkcode/`, 
                 {}, 
                 {
                     headers: {
@@ -133,6 +137,24 @@ const ProfilePage = () => {
         </div>
     </div>
 </div>
+
+            <div className ="Job-title">
+                <ul class="titles"> 
+                <li>
+                    <Si365Datascience size={35} />
+                </li>
+                <li>
+                    <MdEngineering size={35} />
+                </li>
+                <li>
+                    <GiArtificialIntelligence size={35} />
+                </li>
+                </ul>
+            </div>
+    <div>
+
+    </div>
+
             <div className="profile-posts">
                 <div className="grid-posts">
                     {projects.map(project => (

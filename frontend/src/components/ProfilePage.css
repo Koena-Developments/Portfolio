@@ -8,7 +8,7 @@
 .status-ring {
     position: absolute;
     top: -55px; 
-    left: 0;
+    left: -290px;
     width: 240px;
     height: 240px; 
     border-radius: 50%;
@@ -16,7 +16,7 @@
     background-image: linear-gradient(45deg, #F58529, #F77737, #D62976, #962FBF, #4E54C8, #2B59C3);
     background-size: 400% 400%;
     animation: ring-animation 6s ease infinite;
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.8), 0 0 30px rgba(255, 20, 147, 0.8); /* Glowing effect */
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.8), 0 0 30px rgba(255, 20, 147, 0.8); 
 }
 
 @keyframes ring-animation {
@@ -25,12 +25,22 @@
     100% { background-position: 0% 50%; }
 }
 
+.titles
+{
+    display: grid;
+    display: flex;
+    gap: 15px;
+    flex-direction: row;
+    margin-top: -150px;
+    /* margin-left: 15px; */
+    gap: 5px;
+}
+
 .profile-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     border-bottom: 1px solid #dbdbdb;
-    padding-bottom: 20px;
 }
 
 .profile-image {
@@ -57,14 +67,14 @@
    position: relative;
    margin-top: 120px;
    top: -129px;
-   left: -129px;
+   left: -269px;
 
 }
 .follow-button,
 .share-button {
     position: relative;
     top: -120px;
-    right: 150px;
+    right: 300px;
     padding: 5px 15px;
     border: 1px solid #dbdbdb;
     background-color: #0095f6;
@@ -84,7 +94,7 @@
     justify-content: center;
     position: relative;
     top: -190px;
-    right: 145px;
+    right: 300px;
     gap: 15px;
     margin-top: 10px;
     margin-right: -100px;
@@ -95,7 +105,7 @@
     text-align: center;
     width: 600px;
     position:relative;
-    margin-left: 79px;
+    margin-left: -80px;
     top: -150px;
     word-break: break-all;
 }
@@ -104,7 +114,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 190px;
     margin-left: 10px;
 }
 
