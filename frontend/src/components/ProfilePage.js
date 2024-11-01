@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaHome, FaHeart} from 'react-icons/fa';
+import { FaPlus } from "react-icons/fa";
 import { Si365Datascience } from "react-icons/si";
 import { MdEngineering } from "react-icons/md";
 import { GiArtificialIntelligence } from "react-icons/gi";
@@ -137,6 +138,36 @@ const ProfilePage = () => {
         </div>
     </div>
 </div>
+
+                
+            <div className='upcoming-projects'>
+                <div className='project'>
+                <ul className='icons'>
+                    <FaPlus size={35} />
+                    </ul>
+                </div>
+
+
+                <div className='project'>
+                    <ul className='icons'>
+                    <FaPlus size={35} />
+                    </ul>
+                </div>
+
+
+                <div className='project'>
+                <ul className='icons'>
+                    <FaPlus size={35} />
+                    </ul>
+                </div>
+
+            </div>
+
+
+                <div className='hori-line'>
+                    <hr></hr>
+                </div>
+
             <div className ="Job-title">
                 <ul class="titles"> 
                 <li>
@@ -151,6 +182,9 @@ const ProfilePage = () => {
                 </ul>
             </div>
 
+            <div className='hori-line'>
+                <hr></hr>
+            </div>
             <div className="profile-posts">
                 <div className="grid-posts">
                     {projects.map(project => (
