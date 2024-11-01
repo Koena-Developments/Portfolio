@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FaHome, FaHeart} from 'react-icons/fa';
 import { FaPlus } from "react-icons/fa";
 import { Si365Datascience } from "react-icons/si";
 import { MdEngineering } from "react-icons/md";
@@ -138,7 +137,6 @@ const ProfilePage = () => {
         </div>
     </div>
 </div>
-
                 
             <div className='upcoming-projects'>
                 <div className='project'>

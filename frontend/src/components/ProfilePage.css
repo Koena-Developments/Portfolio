@@ -50,7 +50,7 @@ li{
 
 li:hover
 {
-    transform: scale(1.1    );
+    transform: scale(1.1);
 }
 
 .profile-header {
@@ -83,8 +83,8 @@ li:hover
 {
    position: relative;
    margin-top: 120px;
-   top: -129px;
-   left: -269px;
+   top: 100px;
+   left: -670px;
 
 }
 .follow-button,
@@ -123,8 +123,9 @@ li:hover
     text-align: center;
     width: 600px;
     position:relative;
-    margin-left: -80px;
-    top: -150px;
+    margin-left: -699px;
+    top: 10px;
+    
     word-break: break-all;
 }
 
@@ -146,7 +147,7 @@ li:hover
 {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     gap: 15px;
 }
 
