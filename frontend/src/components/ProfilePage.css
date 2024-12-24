@@ -8,7 +8,7 @@
 .status-ring {
     position: absolute;
     top: -55px; 
-    left: -290px;
+    left: 200px;
     width: 240px;
     height: 240px; 
     border-radius: 50%;
@@ -65,6 +65,8 @@ li:hover
     width: 150px;
     height: 150px;
     object-fit: cover;
+    margin-left: 270px;
+
 }
 
 .profile-info {
@@ -72,6 +74,7 @@ li:hover
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+    margin-left: 770px;
 }
 
 .profile-username {
@@ -84,7 +87,7 @@ li:hover
    position: relative;
    margin-top: 120px;
    top: 100px;
-   left: -670px;
+   left: -330px;
 
 }
 .follow-button,
@@ -123,7 +126,7 @@ li:hover
     text-align: center;
     width: 600px;
     position:relative;
-    margin-left: -699px;
+    margin-right: 1445px;
     top: 10px;
     
     word-break: break-all;

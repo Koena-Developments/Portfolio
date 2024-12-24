@@ -19,7 +19,7 @@ const ProfilePage = () => {
             localStorage.setItem('anonymousId', anonymousId);
         }
 
-        axios.get('http://127.0.0.1:8000/api/profile/wethinkcode/')
+        axios.get('http://127.0.0.1:8000/api/profile/thabangmotswenyane/')
             .then(response => {
                 setProfileData(response.data);
                 setIsFollowing(response.data.is_following);
@@ -43,7 +43,7 @@ const ProfilePage = () => {
         const followAction = isFollowing ? 'unfollow' : 'follow';
         try {
             const response = await axios.post(
-                `http://127.0.0.1:8000/api/${followAction}/wethinkcode/`, 
+                `http://127.0.0.1:8000/api/${followAction}/thabangmotswenyane/`, 
                 {}, 
                 {
                     headers: {
@@ -128,10 +128,12 @@ const ProfilePage = () => {
             </button>
             <button className="share-button" onClick={handleShareClick}>Share Profile</button>
         </div>
+
         <div className="profile-stats">
             <span><strong>{projects.length}</strong> projects</span>
             <span><strong>{profileData.followers_count}</strong> followers</span>
         </div>
+        
         <div className="profile-bio">
             <p>{profileData.bio}</p>
         </div>
