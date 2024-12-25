@@ -119,10 +119,11 @@ li:hover
     top: -139px;
     right: 300px;
     gap: 15px;
-    /* margin-top: 0px; */
     margin-right: -100px;
 }
-
+ul{
+    list-style: none;
+}
 .stats
 {
     position: relative;
@@ -149,11 +150,21 @@ li:hover
     margin-left: 9px;
 }
 .project{
-    width: 130px;
-    height: 130px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background-color: gray;
-    
+    transition: .5s;
+}
+
+.project:hover
+{
+    transform: scale(1.1);
+    cursor:pointer;
+
 }
 
 
@@ -163,6 +174,8 @@ li:hover
     flex-direction: row;
     justify-content: start;
     gap: 15px;
+    padding-left: 150px;
+    margin-top: 9px;
 }
 
 .grid-posts {

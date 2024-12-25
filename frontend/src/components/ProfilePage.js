@@ -133,6 +133,8 @@ const ProfilePage = () => {
             <span className="stats"><strong >{projects.length}</strong></span>
             <span> projects</span>
             <span><strong className="stats">{profileData.followers_count}</strong> followers</span>
+            <span><strong className="stats">{profileData.followers_count}</strong> certifications/Qualification</span>
+
         </div>
         
         <div className="profile-bio">
@@ -144,21 +146,21 @@ const ProfilePage = () => {
             <div className='upcoming-projects'>
                 <div className='project'>
                 <ul className='icons'>
-                    <FaPlus size={35} />
+                    <FaPlus size={15} />
                     </ul>
                 </div>
 
 
                 <div className='project'>
                     <ul className='icons'>
-                    <FaPlus size={35} />
+                    <FaPlus size={15} />
                     </ul>
                 </div>
 
 
                 <div className='project'>
                 <ul className='icons'>
-                    <FaPlus size={35} />
+                    <FaPlus size={15} />
                     </ul>
                 </div>
 
