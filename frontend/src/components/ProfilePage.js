@@ -130,8 +130,9 @@ const ProfilePage = () => {
         </div>
 
         <div className="profile-stats">
-            <span><strong>{projects.length}</strong> projects</span>
-            <span><strong>{profileData.followers_count}</strong> followers</span>
+            <span className="stats"><strong >{projects.length}</strong></span>
+            <span> projects</span>
+            <span><strong className="stats">{profileData.followers_count}</strong> followers</span>
         </div>
         
         <div className="profile-bio">
