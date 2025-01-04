@@ -193,6 +193,7 @@ ul{
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 50px;
     left: 355px;
+    top: -100px;
     margin-top: 90px;
     margin-left: 10px;
 }
