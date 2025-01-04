@@ -37,14 +37,14 @@ const ProfilePage = () => {
             .catch(error => {
                 console.error('Error fetching projects:', error);
             });
-    }, []); 
+    }, []);
 
     const handleFollowClick = async () => {
         const followAction = isFollowing ? 'unfollow' : 'follow';
         try {
             const response = await axios.post(
-                `http://127.0.0.1:8000/api/${followAction}/badman/`, 
-                {}, 
+                `http://127.0.0.1:8000/api/${followAction}/badman/`,
+                {},
                 {
                     headers: {
                         'Anonymous-Id': anonymousId,
@@ -52,9 +52,9 @@ const ProfilePage = () => {
                     }
                 }
             );
-    
+
             if (response.status === 200) {
-                setIsFollowing(!isFollowing);  
+                setIsFollowing(!isFollowing);
                 setProfileData(prevData => ({
                     ...prevData,
                     followers_count: prevData.followers_count + (isFollowing ? -1 : 1)
@@ -66,7 +66,6 @@ const ProfilePage = () => {
             console.error(`Error in ${followAction}:`, error.response?.data || error);
         }
     };
-    
 
     const handleLikeClick = (projectId) => {
         axios.post(`http://127.0.0.1:8000/api/projects/${projectId}/like/`, {}, {
@@ -84,8 +83,7 @@ const ProfilePage = () => {
             console.error('Error liking/unliking project:', error.response?.data || error);
         });
     };
-    
-    
+
     const handleShareClick = () => {
         const shareData = {
             title: 'Check out this profile!',
@@ -108,80 +106,76 @@ const ProfilePage = () => {
     return (
         <div className="profile-container">
             <div className="profile-header">
-    <div className="profile-image-container">
-        <img
-            src={profileData.profile_picture || "https://via.placeholder.com/150"}
-            alt="Profile"
-            className="profile-image"
-        />
-    </div>
-    <div className="status-ring"></div> 
-    
-    <div class = "username">
-    <h2>{profileData.username}</h2>
-    </div>
-
-    <div className="profile-info">
-        <div className="profile-username">
-            <button className="follow-button" onClick={handleFollowClick}>
-                {isFollowing ? 'Unfollow' : 'Follow'}
-            </button>
-            <button className="share-button" onClick={handleShareClick}>Share Profile</button>
-        </div>
-
-        <div className="profile-stats">
-            <span className="stats"><strong >{projects.length}</strong></span>
-            <span> projects</span>
-            <span><strong className="stats">{profileData.followers_count}</strong> followers</span>
-            <span><strong className="stats">{profileData.followers_count}</strong> certifications/Qualification</span>
-
-        </div>
-        
-        <div className="profile-bio">
-            <p>{profileData.bio}</p>
-        </div>
-    </div>
-</div>
-                
-            <div className='upcoming-projects'>
-                <div className='project'>
-                <ul className='icons'>
-                    <FaPlus size={15} />
-                    </ul>
+                <div className="profile-image-container">
+                    <div className="status-ring"></div>
+                    <img
+                        src={profileData.profile_picture || "https://via.placeholder.com/150"}
+                        alt="Profile"
+                        className="profile-image"
+                    />
                 </div>
 
-
-                <div className='project'>
-                    <ul className='icons'>
-                    <FaPlus size={15} />
-                    </ul>
+                <div className="username">
+                    <h2>{profileData.username}</h2>
                 </div>
 
+                <div className="profile-info">
+                    <div className="profile-username">
+                        <button className="follow-button" onClick={handleFollowClick}>
+                            {isFollowing ? 'Unfollow' : 'Follow'}
+                        </button>
+                        <button className="share-button" onClick={handleShareClick}>Share Profile</button>
+                    </div>
 
-                <div className='project'>
-                <ul className='icons'>
-                    <FaPlus size={15} />
-                    </ul>
+                    <div className="profile-stats">
+                        <span className="stats">
+                            <strong>{projects.length}</strong> projects
+                        </span>
+                        <span className="stats">
+                            <strong >
+                                {profileData.followers_count}</strong> followers
+                        </span>
+                        <span className="stats">
+                            <strong >
+                                {profileData.certifications_count || 0}</strong> certifications/qualifications
+                        </span>
+                    </div>
+
+                    <div className="profile-bio">
+                        <p>{profileData.bio}</p>
+                    </div>
                 </div>
-
             </div>
 
+            <div className="upcoming-projects">
+                <div className="project">
+                    <ul className="icons">
+                        <FaPlus size={15} />
+                    </ul>
+                </div>
+                <div className="project">
+                    <ul className="icons">
+                        <FaPlus size={15} />
+                    </ul>
+                </div>
+                <div className="project">
+                    <ul className="icons">
+                        <FaPlus size={15} />
+                    </ul>
+                </div>
+            </div>
 
-                {/* <div className='hori-line'>
-                    <hr></hr>
-                </div> */}
-
-            <div className ="Job-title">
-                <ul class="titles"> 
-                <li>
-                    <Si365Datascience size={35} />
-                </li>
-                <li>
-                    <MdEngineering size={35} />
-                </li>
-                <li>
-                    <GiArtificialIntelligence size={35} />
-                </li>
+            <div className="job-title">
+                <ul className="titles">
+                    <li>
+                        <Si365Datascience size={35} />
+                    </li>
+                    <li>
+                        <MdEngineering size={35} />
+                    </li>
+                    <li>
+                        <GiArtificialIntelligence size={35} />
+                    </li>
                 </ul>
             </div>
 
@@ -189,10 +183,13 @@ const ProfilePage = () => {
                 <div className="grid-posts">
                     {projects.map(project => (
                         <div key={project.id} className="project-item">
-                            <img src={project.image || "https://via.placeholder.com/150"} alt={project.title} />
+                            <img
+                                src={project.image || "https://via.placeholder.com/150"}
+                                alt={project.title}
+                            />
                             <h3>{project.title}</h3>
                             <p>{project.description}</p>
-                            <button onClick={() => handleLikeClick(project.id, project.is_liked)}>
+                            <button onClick={() => handleLikeClick(project.id)}>
                                 {project.is_liked ? 'Unlike' : 'Like'} ({project.like_count})
                             </button>
                         </div>
@@ -202,4 +199,5 @@ const ProfilePage = () => {
         </div>
     );
 };
+
 export default ProfilePage;

@@ -6,18 +6,20 @@
 }
 
 .status-ring {
-    position: absolute;
-    top: 75px; 
-    left: 600px;
-    width: 240px;
-    height: 240px; 
+    position: absolute; 
+    bottom: 9px;
+    left: 355px;
+    width: 260px; 
+    height: 260px;
     border-radius: 50%;
-    border: 5px solid transparent;
+    border: 5px solid transparent; 
+    background-color: transparent; 
+    box-sizing: border-box;
     background-image: linear-gradient(45deg, #F58529, #F77737, #D62976, #962FBF, #4E54C8, #2B59C3);
     background-size: 400% 400%;
     animation: ring-animation 6s ease infinite;
-    box-shadow: 0 0 15px rgba(255, 105, 180, 0.8), 0 0 30px rgba(255, 20, 147, 0.8); 
-
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.8), 0 0 30px rgba(255, 20, 147, 0.8);
+    z-index: 1;
 }
 
 @keyframes ring-animation {
@@ -26,16 +28,13 @@
     100% { background-position: 0% 50%; }
 }
 
-/* for the navigation of careers */
 .titles
 {
     display: flex;
     flex-direction: row;
     gap: 80px;
     margin-top: -100px;
-    /* margin-left: 150px; */
     margin: 20px 40%;
-
 }
 
 li{
@@ -60,6 +59,9 @@ li:hover
 }
 
 .profile-image {
+    position: relative;
+    bottom: 25px;
+    left: 130px;
     border-radius: 50%;
     width: 150px;
     height: 150px;
@@ -113,10 +115,9 @@ li:hover
 
 .profile-stats {
     display: flex;
-    justify-content: center;
     position: relative;
-    top: -199px;
-    right: 300px;
+    top: -249px;
+    right: 190px;
     gap: 15px;
     margin-right: -100px;
 }
@@ -138,7 +139,7 @@ ul{
     width: 600px;
     position:relative;
     left: -350px;
-    top: -209px;
+    top: -279px;
     word-break: break-all;
 
 }
@@ -173,24 +174,25 @@ ul{
     flex-direction: row;
     justify-content: start;
     position: relative;
-    top: -130px;
-    left: 179px;
+    top: -180px;
+    left: 230px;
     gap: 15px;
     padding-left: 150px;
     margin-top: 9px;
 }
 
-.Job-title
+.titles
 {
     position: relative;
-    top: -100px;
+    top: -180px;
 }
 
 .grid-posts {
     display: grid;
     position: relative;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 10px;
+    gap: 50px;
+    left: 355px;
     margin-top: 90px;
     margin-left: 10px;
 }
