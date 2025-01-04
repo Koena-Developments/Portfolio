@@ -1,14 +1,14 @@
 .profile-image-container {
     position: relative;
     display: inline-block;
-    left: -480px;
-    top: 50px;
+    left: -590px;
+    top: 95px;
 }
 
 .status-ring {
     position: absolute;
-    top: -55px; 
-    left: 200px;
+    top: 75px; 
+    left: 600px;
     width: 240px;
     height: 240px; 
     border-radius: 50%;
@@ -17,6 +17,7 @@
     background-size: 400% 400%;
     animation: ring-animation 6s ease infinite;
     box-shadow: 0 0 15px rgba(255, 105, 180, 0.8), 0 0 30px rgba(255, 20, 147, 0.8); 
+
 }
 
 @keyframes ring-animation {
@@ -24,7 +25,6 @@
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-
 
 /* for the navigation of careers */
 .titles
@@ -40,7 +40,6 @@
 
 li{
     transition: transform .2s;
-
 }
 
 .hori-line
@@ -79,18 +78,18 @@ li:hover
 
 .profile-username {
     position:relative;
-    margin-right: 890px;
+    margin-right: -190px;
     margin-bottom: -5px;
-    top: 230px;
-
+    top: -190px;
     text-align: center;
 }
+
 .username
 {
    position: relative;
    margin-top: 120px;
-   top: 100px;
-   left: -330px;
+   top: -265px;
+   left: -10px;
 
 }
 .follow-button,
@@ -116,7 +115,7 @@ li:hover
     display: flex;
     justify-content: center;
     position: relative;
-    top: -139px;
+    top: -199px;
     right: 300px;
     gap: 15px;
     margin-right: -100px;
@@ -138,10 +137,10 @@ ul{
     text-align: center;
     width: 600px;
     position:relative;
-    margin-right: 1445px;
-    top: 10px;
-    
+    left: -350px;
+    top: -209px;
     word-break: break-all;
+
 }
 
 .icons
@@ -173,13 +172,23 @@ ul{
     display: flex;
     flex-direction: row;
     justify-content: start;
+    position: relative;
+    top: -130px;
+    left: 179px;
     gap: 15px;
     padding-left: 150px;
     margin-top: 9px;
 }
 
+.Job-title
+{
+    position: relative;
+    top: -100px;
+}
+
 .grid-posts {
     display: grid;
+    position: relative;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 10px;
     margin-top: 90px;
@@ -205,7 +214,7 @@ ul{
 .profile-posts
 {
     position: relative;
-    top: -35px;
+    top: -150px;
 }
 .dark-mode {
     background-color: #121212;

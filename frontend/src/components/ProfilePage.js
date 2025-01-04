@@ -19,7 +19,7 @@ const ProfilePage = () => {
             localStorage.setItem('anonymousId', anonymousId);
         }
 
-        axios.get('http://127.0.0.1:8000/api/profile/thabangmotswenyane/')
+        axios.get('http://127.0.0.1:8000/api/profile/badman/')
             .then(response => {
                 setProfileData(response.data);
                 setIsFollowing(response.data.is_following);
@@ -43,7 +43,7 @@ const ProfilePage = () => {
         const followAction = isFollowing ? 'unfollow' : 'follow';
         try {
             const response = await axios.post(
-                `http://127.0.0.1:8000/api/${followAction}/thabangmotswenyane/`, 
+                `http://127.0.0.1:8000/api/${followAction}/badman/`, 
                 {}, 
                 {
                     headers: {
@@ -114,8 +114,8 @@ const ProfilePage = () => {
             alt="Profile"
             className="profile-image"
         />
-        <div className="status-ring"></div> 
     </div>
+    <div className="status-ring"></div> 
     
     <div class = "username">
     <h2>{profileData.username}</h2>
@@ -167,9 +167,9 @@ const ProfilePage = () => {
             </div>
 
 
-                <div className='hori-line'>
+                {/* <div className='hori-line'>
                     <hr></hr>
-                </div>
+                </div> */}
 
             <div className ="Job-title">
                 <ul class="titles"> 
@@ -185,9 +185,6 @@ const ProfilePage = () => {
                 </ul>
             </div>
 
-            <div className='hori-line'>
-                <hr></hr>
-            </div>
             <div className="profile-posts">
                 <div className="grid-posts">
                     {projects.map(project => (
@@ -205,5 +202,4 @@ const ProfilePage = () => {
         </div>
     );
 };
-
 export default ProfilePage;

@@ -1,3 +1,16 @@
+.app-container {
+  display: flex; /* Set up a horizontal layout */
+  height: 100vh; /* Full-height layout */
+}
+
+.main-content {
+  margin-left: 250px; /* Offset by the sidebar width */
+  flex: 1; /* Take up the remaining space */
+  overflow-y: auto; /* Allow scrolling if content is too tall */
+  padding: 0 20px; /* Add padding for better spacing */
+}
+
+
 .App {
   text-align: center;
 }
